@@ -1,198 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smit Yadav Portfolio</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Smit Yadav — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8f6f1;
+  --surface:#ffffff;
+  --card:#ffffff;
+  --border:#e8e4dc;
+  --border2:#d4cfc5;
+  --accent:#1a1a1a;
+  --green:#2d5a27;
+  --green-light:#e8f0e6;
+  --green-mid:#4a8a42;
+  --text:#1a1a1a;
+  --muted:#7a7570;
+  --muted2:#a09b95;
+  --serif:'Playfair Display',serif;
+  --sans:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:64px;display:flex;justify-content:space-between;align-items:center;background:rgba(248,246,241,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--serif);font-size:1.15rem;color:var(--text);font-weight:600;letter-spacing:0.01em}
+.nav-logo span{color:var(--green-mid)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--text);color:var(--bg);padding:0.5rem 1.25rem;border-radius:6px;font-size:0.82rem;font-weight:500;text-decoration:none;letter-spacing:0.04em;transition:background 0.2s}
+.nav-cta:hover{background:var(--green)}
 
-  <link rel="stylesheet" href="style.css">
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;padding:8rem 3rem 4rem;max-width:1200px;margin:0 auto}
+.hero-left{}
+.hero-eyebrow{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;opacity:0;animation:fadeup 0.5s 0.1s forwards}
+.eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--green-mid)}
+.eyebrow-text{font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--serif);font-size:clamp(2.8rem,5vw,4.8rem);line-height:1.08;margin-bottom:1.6rem;opacity:0;animation:fadeup 0.6s 0.25s forwards;font-weight:600}
+.hero h1 .line2{color:var(--green-mid);font-style:italic}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:440px;line-height:1.85;margin-bottom:2.5rem;opacity:0;animation:fadeup 0.6s 0.4s forwards;font-weight:300}
+.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap;opacity:0;animation:fadeup 0.6s 0.55s forwards}
+.btn{padding:0.75rem 1.6rem;border-radius:7px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;font-family:var(--sans);letter-spacing:0.02em;display:inline-flex;align-items:center;gap:0.4rem}
+.btn-dark{background:var(--text);color:var(--bg)}
+.btn-dark:hover{background:var(--green);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--text);transform:translateY(-1px)}
+
+/* HERO RIGHT — status card */
+.hero-right{opacity:0;animation:fadeup 0.7s 0.6s forwards}
+.status-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:0 2px 24px rgba(0,0,0,0.04)}
+.status-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.avatar{width:52px;height:52px;border-radius:12px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--green)}
+.status-info strong{display:block;font-size:0.95rem;font-weight:600}
+.status-info span{font-size:0.8rem;color:var(--muted)}
+.avail-pill{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;font-weight:500;color:var(--green);background:var(--green-light);padding:0.25rem 0.7rem;border-radius:99px;margin-top:0.3rem}
+.avail-dot{width:6px;height:6px;border-radius:50%;background:var(--green-mid);animation:pulse 2s infinite}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem}
+.mini-stat{background:var(--bg);border-radius:10px;padding:1rem}
+.mini-stat-num{font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--text);line-height:1}
+.mini-stat-label{font-size:0.72rem;color:var(--muted);margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em}
+.spi-highlight{grid-column:1/-1;background:linear-gradient(135deg,#e8f4e6,#f0f8ee);border:1px solid #c8e0c4;border-radius:10px;padding:1rem;display:flex;align-items:center;gap:0.75rem}
+.spi-icon{font-size:1.4rem}
+.spi-highlight strong{display:block;font-size:0.9rem;font-weight:600;color:var(--green)}
+.spi-highlight span{font-size:0.75rem;color:var(--muted)}
+.subjects-label{font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:0.6rem}
+.subject-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.stag{font-size:0.72rem;background:var(--bg);border:1px solid var(--border2);color:var(--muted);padding:0.2rem 0.55rem;border-radius:5px}
+
+/* DIVIDER */
+.full-divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* SECTION */
+.section{padding:5.5rem 3rem;max-width:1200px;margin:0 auto}
+.section-header{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:3rem}
+.section-num{font-family:var(--serif);font-size:0.85rem;color:var(--muted2);font-style:italic}
+.section-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;line-height:1.1}
+.section-line{flex:1;height:1px;background:var(--border);margin-left:1rem}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start}
+.about-body p{font-size:0.97rem;color:var(--muted);line-height:1.9;margin-bottom:1.1rem;font-weight:300}
+.about-body p strong{color:var(--text);font-weight:500}
+.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.edu-card:last-child{margin-bottom:0}
+.edu-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem}
+.edu-inst{font-size:0.9rem;font-weight:600;color:var(--text)}
+.edu-year{font-size:0.78rem;color:var(--muted);background:var(--bg);padding:0.2rem 0.6rem;border-radius:5px;border:1px solid var(--border);white-space:nowrap}
+.edu-deg{font-size:0.82rem;color:var(--muted);margin-bottom:0.5rem}
+.edu-grade{font-size:0.8rem;font-weight:500;color:var(--green)}
+
+/* SKILLS */
+.skills-layout{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.skill-col{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+.skill-col-title{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--green-mid);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}
+.skill-item{font-size:0.85rem;color:var(--muted);padding:0.4rem 0;border-bottom:1px solid var(--bg);display:flex;align-items:center;gap:0.5rem}
+.skill-item:last-child{border-bottom:none}
+.skill-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);flex-shrink:0}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem;position:relative;overflow:hidden;transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s;cursor:default}
+.project-card:hover{border-color:var(--border2);box-shadow:0 8px 32px rgba(0,0,0,0.07);transform:translateY(-3px)}
+.project-card-accent{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--green-mid));border-radius:14px 14px 0 0;opacity:0;transition:opacity 0.25s}
+.project-card:hover .project-card-accent{opacity:1}
+.project-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem}
+.project-index{font-family:var(--serif);font-size:0.85rem;color:var(--muted2);font-style:italic}
+.project-stack{display:flex;gap:0.4rem;flex-wrap:wrap}
+.pstack{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--green);border:1px solid #c8e0c4;background:var(--green-light);padding:0.18rem 0.5rem;border-radius:4px;font-weight:500}
+.project-title{font-family:var(--serif);font-size:1.35rem;font-weight:600;margin-bottom:0.75rem;line-height:1.2}
+.project-desc{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-bottom:1.4rem;font-weight:300}
+.project-bullets{list-style:none;margin-bottom:1.4rem}
+.project-bullets li{font-size:0.82rem;color:var(--muted);padding:0.3rem 0;padding-left:1rem;position:relative;line-height:1.6}
+.project-bullets li::before{content:'—';position:absolute;left:0;color:var(--border2)}
+.project-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1.2rem;border-top:1px solid var(--border)}
+.proj-link{font-size:0.8rem;color:var(--text);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:0.3rem;letter-spacing:0.02em;transition:color 0.2s}
+.proj-link:hover{color:var(--green)}
+.proj-wip{font-size:0.7rem;background:var(--green-light);color:var(--green);border:1px solid #c8e0c4;padding:0.2rem 0.6rem;border-radius:99px;font-weight:500}
+
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ach-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.6rem;display:flex;gap:1.2rem;align-items:flex-start;transition:border-color 0.2s}
+.ach-card:hover{border-color:var(--border2)}
+.ach-icon-box{width:40px;height:40px;border-radius:9px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ach-body strong{display:block;font-size:0.9rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)}
+.ach-body p{font-size:0.8rem;color:var(--muted);line-height:1.6;font-weight:300}
+.ach-year{font-size:0.72rem;color:var(--muted2);margin-top:0.4rem;font-style:italic}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;text-decoration:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:all 0.2s}
+.cert-card:hover{border-color:var(--green-mid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.05)}
+.cert-name{font-size:0.85rem;font-weight:500;color:var(--text)}
+.cert-provider{font-size:0.72rem;color:var(--muted);margin-top:0.2rem}
+.cert-icon{color:var(--muted2);font-size:1rem;flex-shrink:0;transition:color 0.2s}
+.cert-card:hover .cert-icon{color:var(--green-mid)}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
+.contact-heading{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;line-height:1.15;margin-bottom:1rem}
+.contact-heading em{font-style:italic;color:var(--green-mid)}
+.contact-sub{font-size:0.95rem;color:var(--muted);line-height:1.85;margin-bottom:2rem;font-weight:300}
+.contact-links-col{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.cl{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;text-decoration:none;border-bottom:1px solid var(--border);transition:background 0.15s;color:var(--text)}
+.cl:last-child{border-bottom:none}
+.cl:hover{background:var(--bg)}
+.cl-icon{width:36px;height:36px;border-radius:8px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cl-icon svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:1.8}
+.cl-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted2);display:block}
+.cl-val{font-size:0.85rem;font-weight:500;color:var(--text);display:block}
+.cl-arr{margin-left:auto;color:var(--muted2);font-size:0.85rem}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.footer-name{font-family:var(--serif);font-size:0.9rem;color:var(--muted);font-style:italic}
+.footer-copy{font-size:0.78rem;color:var(--muted2)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ANIMATIONS */
+@keyframes fadeup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* MOBILE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem}
+  .hero-right{display:none}
+  .about-grid,.contact-wrap{grid-template-columns:1fr;gap:2.5rem}
+  .skills-layout{grid-template-columns:1fr 1fr}
+  .projects-grid,.ach-grid,.cert-grid{grid-template-columns:1fr}
+  .section{padding:4rem 1.5rem}
+  nav{padding:0 1.5rem}
+  footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
 <nav>
-
-  <div class="nav-logo">
-    Smit <span>Yadav</span>
-  </div>
-
+  <div class="nav-logo">Smit <span>Yadav</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-
-  <a href="mailto:smityadv.2003@gmail.com" class="nav-cta">
-    Hire me
-  </a>
-
+  <a href="mailto:smityadv.2003@gmail.com" class="nav-cta">Hire me</a>
 </nav>
 
 <!-- HERO -->
-
-<section class="hero">
-
+<div class="hero">
   <div class="hero-left">
-
-    <h1>
-      Building software,<br>
-      <span class="line2">one line at a time.</span>
-    </h1>
-
-    <p class="hero-sub">
-      Final-year B.Tech IT student at CSJMU Kanpur.
-      I write Java and Python, build for the web,
-      and care deeply about clean, readable code.
-    </p>
-
-    <div class="hero-btns">
-
-      <a href="#projects" class="btn btn-dark">
-        View my work ↓
-      </a>
-
-      <a href="#contact" class="btn btn-ghost">
-        Get in touch
-      </a>
-
+    <div class="hero-eyebrow">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-text">Open to Software &amp; Web Dev Internships · 2025</span>
     </div>
-
+    <h1>Building software,<br/><span class="line2">one line at a time.</span></h1>
+    <p class="hero-sub">Final-year B.Tech IT student at CSJMU Kanpur. I write Java and Python, build for the web, and care deeply about clean, readable code.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-dark">View my work ↓</a>
+      <a href="mailto:smityadv.2003@gmail.com" class="btn btn-ghost">Get in touch</a>
+    </div>
   </div>
 
-</section>
+  <div class="hero-right">
+    <div class="status-card">
+      <div class="status-top">
+        <div class="avatar">SY</div>
+        <div class="status-info">
+          <strong>Smit Yadav</strong>
+          <span>B.Tech IT · CSJMU Kanpur</span>
+          <div class="avail-pill"><span class="avail-dot"></span>Available for internship</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="mini-stat">
+          <div class="mini-stat-num">8.63</div>
+          <div class="mini-stat-label">Overall CGPA</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-num">6+</div>
+          <div class="mini-stat-label">Certifications</div>
+        </div>
+        <div class="spi-highlight">
+          <div class="spi-icon">⭐</div>
+          <div>
+            <strong>SPI 10 / 10 — Semester 5</strong>
+            <span>Perfect score across all subjects</span>
+          </div>
+        </div>
+      </div>
+      <div class="subjects-label">Sem 5 subjects cleared with 10 SPI</div>
+      <div class="subject-tags">
+        <span class="stag">TOC</span>
+        <span class="stag">Compiler Design</span>
+        <span class="stag">DBMS</span>
+        <span class="stag">DAA</span>
+        <span class="stag">OS</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-<hr class="full-divider">
+<hr class="full-divider"/>
 
 <!-- ABOUT -->
-
-<section class="section" id="about">
-
-  <div class="section-header">
-    <h2 class="section-title">About Me</h2>
+<div class="section" id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About me</h2>
     <div class="section-line"></div>
   </div>
+  <div class="about-grid">
+    <div class="about-body reveal">
+      <p>I'm a <strong>final-year B.Tech Information Technology student</strong> at Chhatrapati Shahu Ji Maharaj University, Kanpur, graduating in 2026. I build with Java, Python, and the web — and I'm actively looking for a <strong>software or web development internship</strong> where I can contribute to real projects.</p>
+      <p>In Semester 5, I achieved a <strong>perfect SPI of 10/10</strong> across five core subjects — TOC, Compiler Design, DBMS, DAA, and Operating Systems — which reflects both my academic commitment and my grasp of computer science fundamentals.</p>
+      <p>I've been part of Smart India Hackathon twice, hold verified certifications from HackerRank and NPTEL, and enjoy exploring AI tools and learning new technologies in my free time.</p>
+    </div>
+    <div class="reveal">
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-inst">CSJMU, Kanpur</div>
+          <div class="edu-year">2022 – 2026</div>
+        </div>
+        <div class="edu-deg">B.Tech — Information Technology</div>
+        <div class="edu-grade">CGPA 8.63 / 10 &nbsp;·&nbsp; SPI 10 / 10 (Sem 5)</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-inst">SJS Public School, Raebareli</div>
+          <div class="edu-year">2020 – 2021</div>
+        </div>
+        <div class="edu-deg">Intermediate — CBSE</div>
+        <div class="edu-grade">86.08%</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-inst">SJS Public School, Raebareli</div>
+          <div class="edu-year">2018 – 2019</div>
+        </div>
+        <div class="edu-deg">High School — CBSE</div>
+        <div class="edu-grade">95.02%</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <p class="hero-sub">
-    I'm Smit Yadav, a final-year B.Tech IT student passionate about
-    software development, DSA, web development, and problem solving.
-  </p>
-
-</section>
-
-<hr class="full-divider">
+<hr class="full-divider"/>
 
 <!-- SKILLS -->
-
-<section class="section" id="skills">
-
-  <div class="section-header">
+<div class="section" id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
     <h2 class="section-title">Skills</h2>
     <div class="section-line"></div>
   </div>
-
-  <div class="skills-layout">
-
+  <div class="skills-layout reveal">
     <div class="skill-col">
       <div class="skill-col-title">Languages</div>
-
       <div class="skill-item">Java</div>
       <div class="skill-item">Python</div>
       <div class="skill-item">C</div>
-    </div>
-
-    <div class="skill-col">
-      <div class="skill-col-title">Web</div>
-
-      <div class="skill-item">HTML</div>
-      <div class="skill-item">CSS</div>
       <div class="skill-item">JavaScript</div>
+      <div class="skill-item">SQL</div>
+      <div class="skill-item">PHP</div>
     </div>
-
+    <div class="skill-col">
+      <div class="skill-col-title">Web &amp; Database</div>
+      <div class="skill-item">HTML5</div>
+      <div class="skill-item">CSS3</div>
+      <div class="skill-item">MySQL</div>
+    </div>
+    <div class="skill-col">
+      <div class="skill-col-title">Tools</div>
+      <div class="skill-item">Git</div>
+      <div class="skill-item">GitHub</div>
+      <div class="skill-item">VS Code</div>
+    </div>
+    <div class="skill-col">
+      <div class="skill-col-title">CS Fundamentals</div>
+      <div class="skill-item">DSA</div>
+      <div class="skill-item">OOP</div>
+      <div class="skill-item">DBMS</div>
+      <div class="skill-item">OS Concepts</div>
+      <div class="skill-item">Compiler Design</div>
+      <div class="skill-item">TOC</div>
+    </div>
   </div>
+</div>
 
-</section>
-
-<hr class="full-divider">
+<hr class="full-divider"/>
 
 <!-- PROJECTS -->
-
-<section class="section" id="projects">
-
-  <div class="section-header">
+<div class="section" id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
     <h2 class="section-title">Projects</h2>
     <div class="section-line"></div>
   </div>
-
   <div class="projects-grid">
-
-    <div class="project-card">
-
-      <div class="project-title">
-        Portfolio Website
+    <div class="project-card reveal">
+      <div class="project-card-accent"></div>
+      <div class="project-meta">
+        <div class="project-index">Project 01</div>
+        <div class="project-stack">
+          <span class="pstack">HTML</span>
+          <span class="pstack">CSS</span>
+          <span class="pstack">JS</span>
+        </div>
       </div>
-
-      <p class="project-desc">
-        Responsive portfolio website hosted on GitHub Pages.
-      </p>
-
+      <div class="project-title">Personal Portfolio Website</div>
+      <p class="project-desc">A responsive developer portfolio built from scratch — no frameworks, no templates. Deployed on GitHub Pages.</p>
+      <ul class="project-bullets">
+        <li>Designed layout using CSS Flexbox and Grid with full mobile responsiveness</li>
+        <li>Smooth scroll, reveal animations, and clean typography with zero dependencies</li>
+        <li>Deployed via GitHub Pages with version control throughout</li>
+      </ul>
+      <div class="project-footer">
+        <a href="https://github.com/Smit-004" class="proj-link" target="_blank">GitHub ↗</a>
+        <span class="proj-wip">Live</span>
+      </div>
     </div>
 
-    <div class="project-card">
-
-      <div class="project-title">
-        Guess Number Game
+    <div class="project-card reveal">
+      <div class="project-card-accent"></div>
+      <div class="project-meta">
+        <div class="project-index">Project 02</div>
+        <div class="project-stack">
+          <span class="pstack">Java</span>
+          <span class="pstack">OOP</span>
+        </div>
       </div>
-
-      <p class="project-desc">
-        Java OOP based console game project.
-      </p>
-
+      <div class="project-title">Guess Number Game</div>
+      <p class="project-desc">An interactive Java console game demonstrating core OOP design — built with modularity and clean class structure in mind.</p>
+      <ul class="project-bullets">
+        <li>Designed with encapsulation and modular class structure across multiple files</li>
+        <li>Random number engine with real-time higher/lower feedback for dynamic gameplay</li>
+        <li>Iterative development approach: each build cycle improved logic and reduced edge-case bugs</li>
+      </ul>
+      <div class="project-footer">
+        <a href="https://github.com/Smit-004/MyGuesserGame" class="proj-link" target="_blank">GitHub ↗</a>
+      </div>
     </div>
-
   </div>
+</div>
 
-</section>
+<hr class="full-divider"/>
 
-<hr class="full-divider">
+<!-- ACHIEVEMENTS -->
+<div class="section" id="achievements">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Achievements</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="ach-grid reveal">
+    <div class="ach-card">
+      <div class="ach-icon-box">🏆</div>
+      <div class="ach-body">
+        <strong>Smart India Hackathon — Shortlisted</strong>
+        <p>Shortlisted at college level for SIH 2025. Contributed to problem analysis and solution ideation for a national-level government challenge.</p>
+        <div class="ach-year">2025</div>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon-box">⭐</div>
+      <div class="ach-body">
+        <strong>SPI 10 / 10 — Perfect Semester</strong>
+        <p>Achieved a perfect SPI in Semester 5, covering TOC, Compiler Design, DBMS, DAA, and Operating Systems.</p>
+        <div class="ach-year">2024</div>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon-box">💡</div>
+      <div class="ach-body">
+        <strong>Smart India Hackathon — Participant</strong>
+        <p>Participated in SIH 2023 as a team member. Gained hands-on experience in rapid prototyping and collaborative problem-solving.</p>
+        <div class="ach-year">2023</div>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon-box">🤝</div>
+      <div class="ach-body">
+        <strong>Volunteer — RoboRumble Tech Fest</strong>
+        <p>Managed event coordination, participant flow, and on-ground technical support at a college-level tech festival.</p>
+        <div class="ach-year">2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider"/>
+
+<!-- CERTIFICATIONS -->
+<div class="section" id="certifications">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cert-grid reveal">
+    <a class="cert-card" href="https://www.hackerrank.com/certificates/952b49342f6b" target="_blank">
+      <div><div class="cert-name">Problem Solving (Basic)</div><div class="cert-provider">HackerRank · Verified</div></div>
+      <div class="cert-icon">↗</div>
+    </a>
+    <a class="cert-card" href="https://www.hackerrank.com/certificates/d9fc341f04b5" target="_blank">
+      <div><div class="cert-name">Python (Basic)</div><div class="cert-provider">HackerRank · Verified</div></div>
+      <div class="cert-icon">↗</div>
+    </a>
+    <a class="cert-card" href="https://www.hackerrank.com/certificates/d4ec6eec96be" target="_blank">
+      <div><div class="cert-name">SQL (Basic + Intermediate)</div><div class="cert-provider">HackerRank · Verified</div></div>
+      <div class="cert-icon">↗</div>
+    </a>
+    <a class="cert-card" href="https://www.hackerrank.com/certificates/88a957c730fc" target="_blank">
+      <div><div class="cert-name">CSS (Basic)</div><div class="cert-provider">HackerRank · Verified</div></div>
+      <div class="cert-icon">↗</div>
+    </a>
+    <a class="cert-card" href="https://www.hackerrank.com/certificates/3e1a95805fb4" target="_blank">
+      <div><div class="cert-name">C# (Basic)</div><div class="cert-provider">HackerRank · Verified</div></div>
+      <div class="cert-icon">↗</div>
+    </a>
+    <a class="cert-card" href="https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs147/Course/NPTEL25CS147S105990052310444962.pdf" target="_blank">
+      <div><div class="cert-name">NPTEL Certification 2025</div><div class="cert-provider">NPTEL · IIT · Verified</div></div>
+      <div class="cert-icon">↗</div>
+    </a>
+  </div>
+</div>
+
+<hr class="full-divider"/>
 
 <!-- CONTACT -->
-
-<section class="section" id="contact">
-
-  <div class="section-header">
+<div class="section" id="contact">
+  <div class="section-header reveal">
+    <span class="section-num">06</span>
     <h2 class="section-title">Contact</h2>
     <div class="section-line"></div>
   </div>
+  <div class="contact-wrap reveal">
+    <div>
+      <h3 class="contact-heading">Let's build<br/><em>something together.</em></h3>
+      <p class="contact-sub">I'm actively looking for software or web development internship opportunities. If you think I'd be a good fit for your team, reach out — I'd love to have a conversation.</p>
+      <a href="mailto:smityadv.2003@gmail.com" class="btn btn-dark">Send me an email ↗</a>
+    </div>
+    <div class="contact-links-col">
+      <a class="cl" href="mailto:smityadv.2003@gmail.com">
+        <div class="cl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+        <div><span class="cl-label">Email</span><span class="cl-val">smityadv.2003@gmail.com</span></div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a class="cl" href="https://www.linkedin.com/in/smit-yadav-303b77326" target="_blank">
+        <div class="cl-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v2a6 6 0 0 1 2-3zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><span class="cl-label">LinkedIn</span><span class="cl-val">smit-yadav-303b77326</span></div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a class="cl" href="https://github.com/Smit-004" target="_blank">
+        <div class="cl-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+        <div><span class="cl-label">GitHub</span><span class="cl-val">github.com/Smit-004</span></div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a class="cl" href="tel:+918423914288">
+        <div class="cl-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 5.72 5.72l1.66-1.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><span class="cl-label">Phone</span><span class="cl-val">+91-8423914288</span></div>
+        <span class="cl-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
 
-  <p class="hero-sub">
-    Open for internships and collaborations.
-  </p>
-
-  <a href="mailto:smityadv.2003@gmail.com" class="btn btn-dark">
-    Send Email
-  </a>
-
-</section>
+<hr class="full-divider"/>
 
 <footer>
-
-  <div class="footer-name">
-    Smit Yadav
-  </div>
-
-  <div class="footer-copy">
-    © 2025 · Hosted on GitHub Pages
-  </div>
-
+  <div class="footer-name">Smit Yadav</div>
+  <div class="footer-copy">© 2025 · Built with HTML, CSS &amp; JS · Hosted on GitHub Pages</div>
 </footer>
 
-<script src="script.js"></script>
-
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(r => obs.observe(r));
+</script>
 </body>
 </html>
+
